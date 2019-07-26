@@ -1,0 +1,7 @@
+DNSADDR=your_registar_dns_page
+DOMAIN=your_actual_domain
+DOMAINID=random_id
+ID=random_id
+LOGINADDR=your_registar_login_page
+PASSWORD=your_password
+USERNAME=your_username

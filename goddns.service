@@ -5,7 +5,8 @@ After=network.target
 [Service]
 Type=simple
 # Another Type option: forking
-User=yourusarnamehere
+User=igor
+WorkingDirectory=/home/USER/$GOPATH/bin
 ExecStart=GoDDNS
 Restart=on-failure
 # Other Restart options: or always, on-abort, etc

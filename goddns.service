@@ -1,13 +1,14 @@
 [Unit]
-Description=Update your registrar's DNS records dynamically
+Description=GoDDNS
 After=network.target
 
 [Service]
 Type=simple
 # Another Type option: forking
 User=igor
-WorkingDirectory=/home/USER/$GOPATH/bin
-ExecStart=GoDDNS
+Environment=GOPATH=/your/go/path
+WorkingDirectory=/your/go/path/src/github.com/igormp/GoDDNS
+ExecStart=go run main.go
 Restart=on-failure
 # Other Restart options: or always, on-abort, etc
 

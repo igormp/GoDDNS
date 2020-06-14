@@ -112,18 +112,18 @@ func main() {
 
 		newIP, err := getCurIP()
 		if err != nil {
-			log.Fatal("[ERROR]", err)
-		}
+			log.Println("[WARN]", err)
+		} else {
+			if ip != newIP {
 
-		if ip != newIP {
+				if err := updateIP(data, newIP); err != nil {
+					log.Println("[WARN]", err)
+				} else {
+					log.Println("[INFO] IP updated to", newIP)
+					ip = newIP
+				}
 
-			if err := updateIP(data, newIP); err != nil {
-				log.Fatal("[ERROR]", err)
-			} else {
-				log.Println("[INFO] IP updated to", newIP)
-				ip = newIP
 			}
-
 		}
 
 		// Sleeps for 5 minutes before checking for changes again

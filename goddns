@@ -1,0 +1,26 @@
+#!/bin/sh /etc/rc.common
+
+START=80
+
+USE_PROCD=1
+PROG="/path/to/your/binary"
+
+
+start_service() {
+	procd_open_instance
+
+
+	procd_set_param command "$PROG" # add any extra params here, for example:
+	#procd_set_param command "$PROG" -env=/path/to/.env
+
+	procd_set_param respawn ${respawn_threshold:-3600} ${respawn_timeout:-5} ${respawn_retry:-5}
+
+	procd_set_param stdout 1 # forward stdout of the command to logd
+	procd_set_param stderr 1 # same for stderr
+
+	procd_set_param user nobody # run service as user nobody
+
+	  procd_set_param pidfile /var/run/goddns.pid # write a pid file on instance start and remove it on stop
+
+	procd_close_instance
+}

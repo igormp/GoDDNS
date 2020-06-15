@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -90,8 +91,18 @@ func updateIP(data datat, ip string) error {
 }
 
 func main() {
+	envPtr := flag.String("env", "", "Custom env file location")
+
+	flag.Parse()
+
 	var envVars map[string]string
-	envVars, err := godotenv.Read()
+	var err error
+	if *envPtr == "" {
+		envVars, err = godotenv.Read()
+	} else {
+		envVars, err = godotenv.Read(*envPtr)
+	}
+
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
